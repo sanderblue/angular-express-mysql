@@ -1,9 +1,21 @@
-div(class="container")
+extends layout
 
-    form(class="form-signin")
-        h2(class="form-signin-heading")Please sign in
-        input(type="text" class="form-control" placeholder="Email address" autofocus)
-        input(type="password" class="form-control" placeholder="Password")
-        label(class="checkbox")
-            input(type="checkbox" value="remember-me") Remember me
-        button(class="btn btn-lg btn-primary btn-block" type="submit")Sign in
+block navigation
+    div(class='navbar navbar-default navbar-fixed-top')
+    div(class='container')
+        div(class='navbar-collapse collapse navigation-links')
+            ul(class='nav navbar-nav navbar-right')
+                li
+                    a(class='navbar-logo-holder navigation-logo navigation-logo-main' href='/')
+                        font(class='s') s
+                        font(class='b') b
+block body
+    div(class='container')
+
+        form(class='form-signin')
+            h2(class='form-signin-heading') Please sign in
+            input(type='text' class='form-control' placeholder='Email address' autofocus)
+            input(type='password' class='form-control' placeholder='Password')
+            label(class='checkbox')
+            input(type='checkbox' value='remember-me') Remember me
+            button(class='btn btn-lg btn-primary btn-block' type='submit') Sign in

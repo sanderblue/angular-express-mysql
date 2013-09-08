@@ -86,6 +86,7 @@ html, body {
 /* line 7, ../sass/partials/_global.scss */
 body {
   background: transparent;
+  color: #000;
 }
 
 /* line 2, ../sass/partials/_content.scss */
