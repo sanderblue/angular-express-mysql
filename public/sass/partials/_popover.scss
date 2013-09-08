@@ -1,0 +1,48 @@
+.popover {
+    @include background(linear-gradient(rgba(0, 0, 0, .92) 0%, rgba(0, 0, 0, .92) 85%, rgba(0, 0, 0, .92) 100%));
+    z-index: 99999;
+    @include border-radius(8px);
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    font-size: 0.9em;
+    position: absolute;
+    max-width: none;
+
+    @include breakpoint(tablet) {
+        &.right{
+            margin-left: -215%;
+        }
+
+        .arrow { display: none; }
+    }
+
+    @include breakpoint(mobile) {
+        left: 5px !important;
+    }
+
+    @include breakpoint(mobile_vertical) {
+        left: -21px !important;
+    }
+}
+
+.parent {
+    font-size: 1.3em;
+}
+
+.child {
+    margin: {
+        left: 6%;
+    }
+}
+
+.grandchild {
+    font-size: 0.7em;
+    margin: {
+        left: 6%;
+    }
+}
+
+.close-popover {
+    float: right;
+    font-size: 16px;
+}

@@ -1,0 +1,90 @@
+.navbar {
+    @include background(linear-gradient(rgba(0, 0, 0, .7), rgba(44, 44, 44, .3)));
+    @include text-shadow(0 1px 4px rgba(0, 0, 0, .75));
+    border-bottom: 0px;
+
+    @include breakpoint(mobile) {
+        text-align: center;
+    }
+
+    .navigation-links li a {
+        @include transition($transition_all);
+        text-decoration: none;
+        color: rgba(255, 255, 255, .85);
+
+        &:hover {
+            cursor: pointer;
+            text-decoration: none;
+            color: rgba(255, 255, 255, .99);
+        }
+    }
+
+    .navbar-collapse.collapse {
+        @include breakpoint(mobile) {
+            border: none;
+            display: block;
+
+            .nav>li {
+                display: inline-block;
+            }
+        }
+
+        .navbar-nav.navbar-right:last-child {
+            margin-right: 0px;
+        }
+    }
+
+    .sander-blue {
+        display: none;
+
+        @include breakpoint(mobile) {
+            display: block;
+        }
+
+    }
+}
+
+.navbar-right {
+    @include breakpoint(mobile) {
+        float: none;
+        margin: {
+            top: 0px;
+            bottom: 0px;
+        }
+    }
+
+    .navigation-logo-main {
+        float: right;
+        // margin: {
+        //     top: 13px;
+        //     bottom: 9px;
+
+        // }
+        padding: {
+            left: 10px;
+            right: 10px;
+        }
+
+        @include breakpoint(mobile) {
+            float: none;
+            margin: {
+                top: 4px;
+                bottom: 0px;
+            }
+        }
+    }
+}
+
+.s, .b  {
+    @include text-shadow(0 1px 4px rgba(100, 100, 100, .30));
+    font-family: $Comfortaa;
+    font-size: 1.7em;
+    letter-spacing: -0.14em;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.s { color: #5bdf4f; }
+.b { color: #01b2ec; }
