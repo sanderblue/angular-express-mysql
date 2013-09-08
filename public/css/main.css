@@ -126,11 +126,11 @@ body {
 
 /* line 1, ../sass/partials/_navigation.scss */
 .navbar {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.7)), color-stop(100%, rgba(44, 44, 44, 0.3)));
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.7), rgba(44, 44, 44, 0.3));
-  background: -moz-linear-gradient(rgba(0, 0, 0, 0.7), rgba(44, 44, 44, 0.3));
-  background: -o-linear-gradient(rgba(0, 0, 0, 0.7), rgba(44, 44, 44, 0.3));
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(44, 44, 44, 0.3));
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(110, 110, 110, 0.7)), color-stop(100%, rgba(110, 110, 110, 0.3)));
+  background: -webkit-linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
+  background: -moz-linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
+  background: -o-linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
+  background: linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
   border-bottom: 0px;
 }
