@@ -1,6 +1,5 @@
 .navbar {
-    @include background(linear-gradient(rgba(110, 110, 110, .7), rgba(110, 110, 110, .3)));
-    @include text-shadow(0 1px 4px rgba(0, 0, 0, .75));
+    @include background(transparent);
     border-bottom: 0px;
 
     @include breakpoint(mobile) {
@@ -10,12 +9,12 @@
     .navigation-links li a {
         @include transition($transition_all);
         text-decoration: none;
-        color: rgba(255, 255, 255, .85);
+        color: #6e6e6e;
 
         &:hover {
             cursor: pointer;
             text-decoration: none;
-            color: rgba(255, 255, 255, .99);
+            color: #424242;
         }
     }
 

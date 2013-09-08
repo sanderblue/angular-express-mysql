@@ -89,7 +89,12 @@ body {
   color: #000;
 }
 
-/* line 2, ../sass/partials/_content.scss */
+/* line 1, ../sass/partials/_content.scss */
+.main-container {
+  margin-top: 100px;
+}
+
+/* line 6, ../sass/partials/_content.scss */
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -97,28 +102,28 @@ body {
   padding: 0 0 0.5em;
 }
 
-/* line 9, ../sass/partials/_content.scss */
+/* line 13, ../sass/partials/_content.scss */
 .menu:before {
   content: "[";
 }
 
-/* line 13, ../sass/partials/_content.scss */
+/* line 17, ../sass/partials/_content.scss */
 .menu:after {
   content: "]";
 }
 
-/* line 17, ../sass/partials/_content.scss */
+/* line 21, ../sass/partials/_content.scss */
 .menu > li {
   display: inline;
 }
 
-/* line 21, ../sass/partials/_content.scss */
+/* line 25, ../sass/partials/_content.scss */
 .menu > li:before {
   content: "|";
   padding-right: 0.3em;
 }
 
-/* line 26, ../sass/partials/_content.scss */
+/* line 30, ../sass/partials/_content.scss */
 .menu > li:nth-child(1):before {
   content: "";
   padding: 0;
@@ -126,12 +131,7 @@ body {
 
 /* line 1, ../sass/partials/_navigation.scss */
 .navbar {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(110, 110, 110, 0.7)), color-stop(100%, rgba(110, 110, 110, 0.3)));
-  background: -webkit-linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
-  background: -moz-linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
-  background: -o-linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
-  background: linear-gradient(rgba(110, 110, 110, 0.7), rgba(110, 110, 110, 0.3));
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+  background: transparent;
   border-bottom: 0px;
 }
 @media (max-width: 480px) {
@@ -140,63 +140,63 @@ body {
     text-align: center;
   }
 }
-/* line 10, ../sass/partials/_navigation.scss */
+/* line 9, ../sass/partials/_navigation.scss */
 .navbar .navigation-links li a {
   -webkit-transition: all 0.1s ease-in-out;
   -moz-transition: all 0.1s ease-in-out;
   -o-transition: all 0.1s ease-in-out;
   transition: all 0.1s ease-in-out;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.85);
+  color: #6e6e6e;
 }
-/* line 15, ../sass/partials/_navigation.scss */
+/* line 14, ../sass/partials/_navigation.scss */
 .navbar .navigation-links li a:hover {
   cursor: pointer;
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.99);
+  color: #424242;
 }
 @media (max-width: 480px) {
-  /* line 22, ../sass/partials/_navigation.scss */
+  /* line 21, ../sass/partials/_navigation.scss */
   .navbar .navbar-collapse.collapse {
     border: none;
     display: block;
   }
-  /* line 27, ../sass/partials/_navigation.scss */
+  /* line 26, ../sass/partials/_navigation.scss */
   .navbar .navbar-collapse.collapse .nav > li {
     display: inline-block;
   }
 }
-/* line 32, ../sass/partials/_navigation.scss */
+/* line 31, ../sass/partials/_navigation.scss */
 .navbar .navbar-collapse.collapse .navbar-nav.navbar-right:last-child {
   margin-right: 0px;
 }
-/* line 37, ../sass/partials/_navigation.scss */
+/* line 36, ../sass/partials/_navigation.scss */
 .navbar .sander-blue {
   display: none;
 }
 @media (max-width: 480px) {
-  /* line 37, ../sass/partials/_navigation.scss */
+  /* line 36, ../sass/partials/_navigation.scss */
   .navbar .sander-blue {
     display: block;
   }
 }
 
 @media (max-width: 480px) {
-  /* line 47, ../sass/partials/_navigation.scss */
+  /* line 46, ../sass/partials/_navigation.scss */
   .navbar-right {
     float: none;
     margin-top: 0px;
     margin-bottom: 0px;
   }
 }
-/* line 56, ../sass/partials/_navigation.scss */
+/* line 55, ../sass/partials/_navigation.scss */
 .navbar-right .navigation-logo-main {
   float: right;
   padding-left: 10px;
   padding-right: 10px;
 }
 @media (max-width: 480px) {
-  /* line 56, ../sass/partials/_navigation.scss */
+  /* line 55, ../sass/partials/_navigation.scss */
   .navbar-right .navigation-logo-main {
     float: none;
     margin-top: 4px;
@@ -204,24 +204,24 @@ body {
   }
 }
 
-/* line 78, ../sass/partials/_navigation.scss */
+/* line 77, ../sass/partials/_navigation.scss */
 .s, .b {
   text-shadow: 0 1px 4px rgba(100, 100, 100, 0.3);
   font-family: "Comfortaa", sans-serif;
   font-size: 1.7em;
   letter-spacing: -0.14em;
 }
-/* line 84, ../sass/partials/_navigation.scss */
+/* line 83, ../sass/partials/_navigation.scss */
 .s:hover, .b:hover {
   text-decoration: none;
 }
 
-/* line 89, ../sass/partials/_navigation.scss */
+/* line 88, ../sass/partials/_navigation.scss */
 .s {
   color: #5bdf4f;
 }
 
-/* line 90, ../sass/partials/_navigation.scss */
+/* line 89, ../sass/partials/_navigation.scss */
 .b {
   color: #01b2ec;
 }
@@ -340,11 +340,7 @@ body {
 
 /* line 1, ../sass/partials/_footer.scss */
 .footer {
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.3)), color-stop(100%, rgba(160, 160, 160, 0.6)));
-  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
-  background: -moz-linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
-  background: -o-linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
-  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
+  background: transparent;
   position: fixed;
   width: 100%;
   bottom: 0;
@@ -354,19 +350,18 @@ body {
   font-size: 0.75em;
 }
 
-/* line 12, ../sass/partials/_footer.scss */
+/* line 13, ../sass/partials/_footer.scss */
 .footer-text-holder {
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
   margin: 0 auto;
   width: 1000px;
   text-align: center;
-  color: #ffffff;
+  color: #848484;
   font-size: 0.93em;
   position: relative;
   padding-top: 5px;
 }
 
-/* line 25, ../sass/partials/_footer.scss */
+/* line 26, ../sass/partials/_footer.scss */
 .pipe {
   font-family: "Comfortaa", sans-serif;
   font-size: 1.2em;

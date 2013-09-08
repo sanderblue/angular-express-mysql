@@ -3,11 +3,17 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-    http    = require('http'),
-    routes  = require('./routes'),
-    api     = require('./routes/api'),
-    app     = express();
+var express   = require('express'),
+    http      = require('http'),
+    routes    = require('./routes'),
+    database  = require('./src/database'),
+    api       = require('./routes/api'),
+    models    = require('./models.js'),
+    crypto    = require('crypto'),
+    app       = express();
+
+
+var sequelize = new Sequelize('database', 'root', 'password')
 
 // Configuration
 app.configure(function(){
@@ -32,6 +38,32 @@ app.configure('development', function(){
 app.configure('production', function(){
     app.use(express.errorHandler());
 });
+
+var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : 'password',
+        database : 'angularexpress'
+    });
+
+var app = module.exports = express.createServer();
+
+// Database setup
+
+// connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
+//     if (err) throw err;
+//     connection.query('USE test', function (err) {
+//         if (err) throw err;
+//         connection.query('CREATE TABLE IF NOT EXISTS users('
+//             + 'id INT NOT NULL AUTO_INCREMENT,'
+//             + 'PRIMARY KEY(id),'
+//             + 'name VARCHAR(60)'
+//             +  ')', function (err) {
+//                 if (err) throw err;
+//             });
+//     });
+// });
+
 
 // Routes
 app.get('/', routes.index);

@@ -1,5 +1,6 @@
 .footer {
-    @include background(linear-gradient(rgba(255, 255, 255, .3), rgba(160, 160, 160, .6)));
+    // @include background(linear-gradient(rgba(255, 255, 255, .3), rgba(160, 160, 160, .6)));
+    @include background(transparent);
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -10,11 +11,11 @@
 }
 
 .footer-text-holder {
-    @include text-shadow(0 1px 4px rgba(0,0,0,.75));
+    // @include text-shadow(0 1px 4px rgba(0,0,0,.75));
     margin: 0 auto;
     width: 1000px;
     text-align: center;
-    color: #ffffff;
+    color: #848484;
     font-size: 0.93em;
     position: relative;
     padding: {
