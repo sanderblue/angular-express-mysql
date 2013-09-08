@@ -6,9 +6,9 @@ block navigation
         div(class='navbar-collapse collapse navigation-links')
             ul(class='nav navbar-nav navbar-right')
                 li
-                    a(class='navbar-logo-holder navigation-logo navigation-logo-main' href='/')
-                        font(class='s') s
-                        font(class='b') b
+                    a(class='navbar-logo-holder navigation-logo navigation-logo-main' href='/') Home
+                        //- font(class='s') s
+                        //- font(class='b') b
 block body
     div(class='container')
 
@@ -16,6 +16,7 @@ block body
             h2(class='form-signin-heading') Please sign in
             input(type='text' class='form-control' placeholder='Email address' autofocus)
             input(type='password' class='form-control' placeholder='Password')
-            label(class='checkbox')
-            input(type='checkbox' value='remember-me') Remember me
+            label(class='checkbox') Remember me
+                input(type='checkbox' value='remember-me')
+
             button(class='btn btn-lg btn-primary btn-block' type='submit') Sign in
