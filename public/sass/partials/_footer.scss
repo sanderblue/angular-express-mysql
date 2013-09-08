@@ -1,0 +1,29 @@
+.footer {
+    @include background(linear-gradient(rgba(255, 255, 255, .3), rgba(160, 160, 160, .6)));
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    max-height: 26px;
+    min-height: 26px;
+    color: #616161;
+    font-size: 0.75em
+}
+
+.footer-text-holder {
+    @include text-shadow(0 1px 4px rgba(0,0,0,.75));
+    margin: 0 auto;
+    width: 1000px;
+    text-align: center;
+    color: #ffffff;
+    font-size: 0.93em;
+    position: relative;
+    padding: {
+        top: 5px;
+    }
+}
+
+.pipe {
+    font-family: $Comfortaa;
+    font-size: 1.2em;
+    color: #4cd03f;
+}

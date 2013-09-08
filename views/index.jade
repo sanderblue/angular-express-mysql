@@ -12,7 +12,7 @@ block navigation
 block body
     div(class='container')
 
-        form(class='form-signin')
+        form(class='form-signin' action="/login" method="post")
             h2(class='form-signin-heading') Please sign in
             input(type='text' class='form-control' placeholder='Email address' autofocus)
             input(type='password' class='form-control' placeholder='Password')
@@ -20,3 +20,18 @@ block body
                 input(type='checkbox' value='remember-me')
 
             button(class='btn btn-lg btn-primary btn-block' type='submit') Sign in
+
+
+        h1= title
+        p Welcome
+        p Paths we have:
+        div!= path_list
+        div .
+
+block footer
+    footer
+      div(class='footer')
+          div(class='footer-text-holder')
+            font(class='copyright') Loggedin? #{ logged }
+            font(class='pipe') |
+            font(class='name') AES v0.0.1

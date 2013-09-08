@@ -18,6 +18,8 @@ app.configure(function(){
         layout: false
     });
     app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session({ secret: 'somethingkindofridiculousthatmakesnosenseatallexceptonlytoyou' }));
     app.use(express.methodOverride());
     app.use(express.static(__dirname + '/public'));
     app.use(app.router);

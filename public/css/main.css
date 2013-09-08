@@ -337,3 +337,38 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+/* line 1, ../sass/partials/_footer.scss */
+.footer {
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(255, 255, 255, 0.3)), color-stop(100%, rgba(160, 160, 160, 0.6)));
+  background: -webkit-linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
+  background: -moz-linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
+  background: -o-linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
+  background: linear-gradient(rgba(255, 255, 255, 0.3), rgba(160, 160, 160, 0.6));
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  max-height: 26px;
+  min-height: 26px;
+  color: #616161;
+  font-size: 0.75em;
+}
+
+/* line 12, ../sass/partials/_footer.scss */
+.footer-text-holder {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.75);
+  margin: 0 auto;
+  width: 1000px;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.93em;
+  position: relative;
+  padding-top: 5px;
+}
+
+/* line 25, ../sass/partials/_footer.scss */
+.pipe {
+  font-family: "Comfortaa", sans-serif;
+  font-size: 1.2em;
+  color: #4cd03f;
+}
