@@ -1,19 +1,15 @@
 
-/**
- * Module dependencies.
- */
 
+// Module dependencies
 var express   = require('express'),
     http      = require('http'),
-    routes    = require('./routes'),
-    database  = require('./src/database'),
-    api       = require('./routes/api'),
-    models    = require('./models.js'),
     crypto    = require('crypto'),
+
+    routes    = require('./src/routes'),
+    database  = require('./src/database'),
+    api       = require('./src/routes/api'),
+    models    = require('./src/models.js'),
     app       = express();
-
-
-var sequelize = new Sequelize('database', 'root', 'password')
 
 // Configuration
 app.configure(function(){
