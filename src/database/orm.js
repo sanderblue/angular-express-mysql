@@ -257,6 +257,7 @@ var User = sequelize.define('User', { firstname: Sequelize.STRING, lastname: Seq
 // Example:
 User.build({ firstname: 'foo', lastname: 'bar' }).getFullname(); // 'foo bar'
 
+
 // Find - Search for one specific element in the database
 // search for known ids
 Project.find(123).success(function(project) {
