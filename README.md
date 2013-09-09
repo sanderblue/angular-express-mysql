@@ -4,4 +4,4 @@ An app built with an [Angular](http://angularjs.org/) frontend and an [Express](
 
 Kickstarted with [Angular-Express-Seed](https://github.com/btford/angular-express-seed).
 
-Not really much to see here just yet.
+Not much to see here just yet.
