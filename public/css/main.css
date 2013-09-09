@@ -153,7 +153,7 @@ body {
 .navbar .navigation-links li a:hover {
   cursor: pointer;
   text-decoration: none;
-  color: #424242;
+  color: #2F2F2F;
 }
 @media (max-width: 480px) {
   /* line 21, ../sass/partials/_navigation.scss */
@@ -366,4 +366,6 @@ body {
   font-family: "Comfortaa", sans-serif;
   font-size: 1.2em;
   color: #4cd03f;
+  padding-left: 4px;
+  padding-right: 6px;
 }
