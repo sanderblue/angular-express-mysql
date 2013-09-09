@@ -6,9 +6,9 @@ var express   = require('express'),
     crypto    = require('crypto'),
 
     routes    = require('./src/routes'),
-    database  = require('./src/database'),
+    // database  = require('./src/database'),
     api       = require('./src/routes/api'),
-    models    = require('./src/models.js'),
+    // models    = require('./src/models.js'),
     app       = express();
 
 // Configuration
@@ -35,14 +35,14 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-var connection = mysql.createConnection({
-        host     : 'localhost',
-        user     : 'root',
-        password : 'password',
-        database : 'angularexpress'
-    });
+// var connection = mysql.createConnection({
+//         host     : 'localhost',
+//         user     : 'root',
+//         password : 'password',
+//         database : 'angularexpress'
+//     });
 
-var app = module.exports = express.createServer();
+// var app = module.exports = express.createServer();
 
 // Database setup
 
