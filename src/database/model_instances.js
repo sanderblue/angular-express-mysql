@@ -142,13 +142,17 @@ Person.create({
 }).success(function(john) {
     console.log(john.values);
 
-    // result example:
-    // { name: 'Rambow',
-    //   firstname: 'John',
-    //   id: 1,
-    //   createdAt: Tue, 01 May 2012 19:12:16 GMT,
-    //   updatedAt: Tue, 01 May 2012 19:12:16 GMT
-    // }
+    /* result example:
+
+        {
+            name: 'Rambow',
+            firstname: 'John',
+            id: 1,
+            createdAt: Tue, 01 May 2012 19:12:16 GMT,
+            updatedAt: Tue, 01 May 2012 19:12:16 GMT
+        }
+
+    */
 });
 
 
