@@ -71,23 +71,6 @@ app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);
 app.delete('/api/post/:id', api.deletePost);
 
-// app.post('/createuser', function (req, res){
-//   console.log("POST: ");
-//   res.header("Access-Control-Allow-Origin", "http://localhost");
-//   res.header("Access-Control-Allow-Methods", "GET, POST");
-//   // The above 2 lines are required for Cross Domain Communication(Allowing the methods that come as Cross
-//   // Domain Request
-//   console.log(req.body);
-//   console.log(req.body.mydata);
-//   var jsonData = JSON.parse(req.body.mydata);
-
-//   db.things.save({email: jsonData.email, password: jsonData.password, username: jsonData.username},
-//        function(err, saved) { // Query in MongoDB via Mongo JS Module
-//            if( err || !saved ) res.end( "User not saved");
-//            else res.end( "User saved");
-//        });
-// });
-
 app.post('/createuser', function (req, res) {
     console.log("POST: ", req);
 
