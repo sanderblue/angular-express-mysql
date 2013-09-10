@@ -21,23 +21,31 @@ block body
 
             button(class='btn btn-lg btn-primary btn-block' type='submit') Sign in
 
-        div(ng-controller="Controller")
-            form(novalidate class="simple-form")
-                input(type="text" ng-model="user.name")
-                input(type="email" ng-model="user.email")
-                input(type="radio" ng-model="user.gender" value="male") male
-                input(type="radio" ng-model="user.gender" value="female") female
-                button(ng-click="reset()")RESET
-                button(ng-click="update(user)")SAVE
+        div(class="col-md-2 col-md-offset-5")
+            button(type="button" class="btn btn-lg btn-primary btn-block" data-toggle="modal" data-target="#myModal") Register
 
-            pre form = {{user | json}}
-            pre master = {{master | json}}
+        div(id="myModal" class="modal fade")
+            div(class="modal-dialog")
+                div(class="modal-content")
+                    div(class="modal-header")
+                        button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+                        h4(class="modal-title") Register
 
-        //- h1= title
-        //- p Welcome
-        //- p Paths we have:
-        //- div!= path_list
-        //- div .
+                    div(class="modal-body")
+                        div(ng-controller="RegistrationCtrl" class="col-md-4 col-lg-offset-4 form-holder")
+                            form(class="form-horizontal form-registration" role="form")
+                                div(class="form-group")
+                                    input(type="text" ng-model="user.name" class='form-control' placeholder='Name')
+                                div(class="form-group")
+                                    input(type="email" ng-model="user.email" class='form-control' placeholder='Email address')
+                                div(class="form-group")
+                                    input(type="password" ng-model="user.password" class='form-control' placeholder='Password')
+
+                                button(ng-click="reset()" class='btn btn-sm btn-primary btn-block') Reset
+                                button(ng-click="update(user)" class='btn btn-sm btn-primary btn-block') Register
+
+                            //- pre form = {{user | json}}
+                            //- pre master = {{master | json}}
 
     script(src='js/lib/jquery.min.js')
     script(src='js/lib/bootstrap.min.js')

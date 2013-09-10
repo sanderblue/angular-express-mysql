@@ -91,7 +91,7 @@ body {
 
 /* line 1, ../sass/partials/_content.scss */
 .main-container {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 /* line 6, ../sass/partials/_content.scss */
@@ -368,4 +368,27 @@ body {
   color: #4cd03f;
   padding-left: 4px;
   padding-right: 6px;
+}
+
+/* line 6, ../sass/partials/_forms.scss */
+.form-signin .form-signin-heading {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* line 26, ../sass/partials/_forms.scss */
+.form-registration .form-signin-heading {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+/* line 34, ../sass/partials/_forms.scss */
+.form-registration button {
+  margin-top: 10px;
+}
+
+/* line 41, ../sass/partials/_forms.scss */
+.col-md-4.form-holder {
+  float: none;
 }

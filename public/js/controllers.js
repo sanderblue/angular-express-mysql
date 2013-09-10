@@ -2,6 +2,20 @@
 
 /* Controllers */
 
+function RegistrationCtrl($scope) {
+    $scope.master= {};
+
+    $scope.update = function(user) {
+        $scope.master= angular.copy(user);
+    };
+
+    $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+    };
+
+    $scope.reset();
+}
+
 function IndexCtrl($scope, $http) {
     $http.get('/api/posts').success(function(data, status, headers, config) {
         $scope.posts = data.posts;
