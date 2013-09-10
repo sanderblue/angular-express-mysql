@@ -1,13 +1,12 @@
-
-
 // Module dependencies
 var express   = require('express'),
     http      = require('http'),
     crypto    = require('crypto'),
+    mysql     = require('mysql'),
 
     routes    = require('./src/routes'),
-    // database  = require('./src/database'),
     api       = require('./src/routes/api'),
+    // database  = require('./src/database'),
     // models    = require('./src/models.js'),
     app       = express();
 
@@ -35,14 +34,14 @@ app.configure('production', function(){
     app.use(express.errorHandler());
 });
 
-// var connection = mysql.createConnection({
-//         host     : 'localhost',
-//         user     : 'root',
-//         password : 'password',
-//         database : 'angularexpress'
-//     });
+var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : 'password',
+        database : 'angularexpress'
+    });
 
-// var app = module.exports = express.createServer();
+var app = module.exports = express.createServer();
 
 // Database setup
 
@@ -72,6 +71,38 @@ app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);
 app.delete('/api/post/:id', api.deletePost);
 
+// app.post('/createuser', function (req, res){
+//   console.log("POST: ");
+//   res.header("Access-Control-Allow-Origin", "http://localhost");
+//   res.header("Access-Control-Allow-Methods", "GET, POST");
+//   // The above 2 lines are required for Cross Domain Communication(Allowing the methods that come as Cross
+//   // Domain Request
+//   console.log(req.body);
+//   console.log(req.body.mydata);
+//   var jsonData = JSON.parse(req.body.mydata);
+
+//   db.things.save({email: jsonData.email, password: jsonData.password, username: jsonData.username},
+//        function(err, saved) { // Query in MongoDB via Mongo JS Module
+//            if( err || !saved ) res.end( "User not saved");
+//            else res.end( "User saved");
+//        });
+// });
+
+app.post('/createuser', function (req, res) {
+    console.log("POST: ", req);
+
+    // Cross Domain Communication
+    res.header("Access-Control-Allow-Origin", "http://localhost");
+    res.header("Access-Control-Allow-Methods", "GET, POST");
+
+    connection.query('INSERT INTO users SET ?', req.body,
+        function (err, result) {
+            if (err) throw err;
+            res.send('User added to database with ID: ' + result.insertId);
+        }
+    );
+});
+
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
@@ -80,6 +111,6 @@ app.get('*', routes.index);
 //     console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
 // });
 
-http.createServer(app).listen(app.get('port'), function(){
+app.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
 });

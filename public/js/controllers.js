@@ -2,7 +2,7 @@
 
 /* Controllers */
 
-function RegistrationCtrl($scope) {
+function RegistrationCtrl($scope, $http) {
     $scope.master= {};
 
     $scope.update = function(user) {
@@ -21,7 +21,7 @@ function RegistrationCtrl($scope) {
 
         $http({
             method : 'POST',
-            url : '/create',
+            url : '/createuser',
             data : $scope.user
         })
 
