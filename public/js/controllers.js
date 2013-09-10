@@ -13,6 +13,21 @@ function RegistrationCtrl($scope) {
         $scope.user = angular.copy($scope.master);
     };
 
+    $scope.user = {};
+
+    $scope.createUser = function() {
+
+        console.log("USER DATA: ", $scope.user);
+
+        $http({
+            method : 'POST',
+            url : '/create',
+            data : $scope.user
+        })
+
+        $scope.reset();
+    }
+
     $scope.reset();
 }
 
