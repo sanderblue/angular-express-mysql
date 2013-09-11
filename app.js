@@ -8,7 +8,8 @@ var express   = require('express'),
     api       = require('./src/routes/api'),
     // database  = require('./src/database'),
     // models    = require('./src/models.js'),
-    app       = express();
+
+    app       = module.exports = express();
 
 // Configuration
 app.configure(function(){
@@ -41,10 +42,7 @@ var connection = mysql.createConnection({
         database : 'angularexpress'
     });
 
-var app = module.exports = express.createServer();
-
-// Database setup
-
+// Optional Database Setup
 // connection.query('CREATE DATABASE IF NOT EXISTS test', function (err) {
 //     if (err) throw err;
 //     connection.query('USE test', function (err) {
@@ -81,6 +79,8 @@ app.post('/createuser', function (req, res) {
     connection.query('INSERT INTO users SET ?', req.body,
         function (err, result) {
             if (err) throw err;
+
+            console.log('User added to database with ID: ' + result.insertId);
             res.send('User added to database with ID: ' + result.insertId);
         }
     );
@@ -89,11 +89,6 @@ app.post('/createuser', function (req, res) {
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
-// Start server
-// app.listen(3000, function(){
-//     console.log("Express server listening on port %d in %s mode", app.get('port'), app.settings.env);
-// });
-
-app.listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
 });
