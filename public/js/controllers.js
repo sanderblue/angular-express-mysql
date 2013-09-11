@@ -17,16 +17,48 @@ function RegistrationCtrl($scope, $http) {
 
     $scope.createUser = function() {
 
-        console.log("USER DATA: ", $scope.user);
+        console.log('USER DATA FROM CLIENT: ', $scope.user);
+
+        $scope.codeStatus = '';
 
         $http({
             method : 'POST',
-            url : '/createuser',
+            url : 'http://localhost:3000/createuser',
+            headers: {
+                'Content-Type': 'application/json'
+            },
             data : $scope.user
-        })
+        }).
+        success(function(response) {
+            console.log('success', response); // Getting Success Response in Callback
+
+            $scope.codeStatus = response.data;
+
+            console.log($scope.codeStatus);
+
+        }).
+        error(function(response) {
+            console.log("error", response); // Getting Error Response in Callback
+
+            $scope.codeStatus = response || "Request failed";
+
+            console.log($scope.codeStatus);
+        });
+
+        // Calling the list function in Angular Controller to show all current data in HTML
+        // $scope.list();
 
         $scope.reset();
     }
+
+    // $scope.list = function() {
+    //     var url = 'http://localhost:3000/createuser'; // URL where our Node.js server is running
+
+    //     $http.get(url).success(function(data) {
+    //         $scope.users = data;
+    //     });
+    //       // Accessing the Angular $http Service to get data via REST Communication from Node Server
+    // };
 
     $scope.reset();
 }

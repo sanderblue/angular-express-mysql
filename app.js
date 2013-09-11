@@ -73,8 +73,8 @@ app.post('/createuser', function (req, res) {
     console.log("POST: ", req);
 
     // Cross Domain Communication
-    res.header("Access-Control-Allow-Origin", "http://localhost");
-    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header('Access-Control-Allow-Origin', 'http://localhost');
+    res.header('Access-Control-Allow-Methods', 'GET, POST');
 
     connection.query('INSERT INTO users SET ?', req.body,
         function (err, result) {
@@ -90,5 +90,5 @@ app.post('/createuser', function (req, res) {
 app.get('*', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
-    console.log("Express server listening on port " + app.get('port'));
+    console.log('Express server listening on port ' + app.get('port'));
 });
