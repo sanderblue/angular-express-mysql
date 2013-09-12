@@ -10,6 +10,20 @@ var express   = require('express'),
     // models    = require('./src/models.js'),
 
     app       = module.exports = express();
+    Sequelize = require(__dirname + '/node_modules/sequelize/index');
+
+// Initialize ORM
+// var sequelize = new Sequelize('angularexpress', 'root', 'password', {
+//     host: 'localhost',
+//     port: 3306,
+//     dialect: 'mysql'
+// });
+
+// Import our User model
+// var User = sequelize.import(__dirname + "/models/user");
+
+// Automaticaly generates the user table
+// User.sync();
 
 // Configuration
 app.configure(function(){
@@ -68,6 +82,34 @@ app.get('/api/post/:id', api.post);
 app.post('/api/post', api.addPost);
 app.put('/api/post/:id', api.editPost);
 app.delete('/api/post/:id', api.deletePost);
+
+//Generates user specific salt (Prevent Rainbow Table Attacks)
+function makesalt()
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < 15; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
+// Register, Save user into MySQL
+function register(name, pass, fn) {
+  if (!module.parent) console.log('registering %s:%s', name, pass);
+    var salt = makesalt();
+    User
+        .build({ username: name, password: hash(pass,salt), salt: salt })
+        .save()
+        .success(function(user_query) {
+          user = new Object();
+          user.id = user_query.id;
+          user.username = user_query.username;
+          user.password = user_query.password;
+            return fn(null, user);
+        })
+}
 
 app.post('/createuser', function (req, res) {
     console.log("POST: ", req);
