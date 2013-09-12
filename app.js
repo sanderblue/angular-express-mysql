@@ -129,50 +129,6 @@ function authenticate(name, pass, fn) {
     });
 }
 
-// app.post('/register', function(req, res){
-//     // Cross Domain Communication
-//     res.header('Access-Control-Allow-Origin', 'http://localhost');
-//     res.header('Access-Control-Allow-Methods', 'GET, POST');
-
-//     console.log("REQUEST BODY: ", req.body);
-
-//     req.body.password =
-
-//     User.findOrCreate(req.body).success(function(user, created) {
-
-//         user.password = user_query.password;
-
-//         if (user.password == hash(pass,user_query.salt)) return fn(null, user);
-
-//         console.log("USER: ", user.values)
-//         console.log("CREATED: ", created)
-//     });
-
-//     // authenticate(req.body.username, req.body.password, function(err, user){
-//     //     if (user) {
-
-//     //         console.log('IF USER')
-
-//     //         // Regenerate session when signing in
-//     //         // to prevent fixation
-//     //         req.session.regenerate(function() {
-//     //             // Store the user's primary key
-//     //             // in the session store to be retrieved,
-//     //             // or in this case the entire user object
-//     //             req.session.user = user;
-//     //             res.redirect('back');
-//     //         });
-//     //     } else {
-//     //         console.log('ELSE Auth failed')
-
-//     //         req.session.error = 'Authentication failed, please check your '
-//     //             + ' username and password.';
-//     //         res.redirect('login');
-//     //     }
-//     // });
-// });
-
-
 /*
     User Registration
 */
