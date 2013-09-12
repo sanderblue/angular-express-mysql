@@ -202,6 +202,10 @@ app.post('/register', function(req, res){
 
 // Start the server
 if (!module.parent) {
-    app.listen(3000);
-    console.log('Express started on port 3000');
+    http.createServer(app).listen(app.get('port'), function(){
+        console.log('Express server listening on port ' + app.get('port'));
+    });
+
+    // app.listen(3000);
+    // console.log('Express started on port 3000');
 }
