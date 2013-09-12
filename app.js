@@ -98,11 +98,18 @@ function hash(msg, key) {
 
 // Authenticate using MySQL
 function authenticate(name, pass, fn) {
+
+    console.log('Authenticate: ', name, pass)
+
     if (!module.parent) console.log('authenticating %s:%s', name, pass);
     var user;
-    User.find({
+    User.findOrCreate({
         where: { username: name },
-    }).success(function(user_query) {
+    }).success(function(user_query, created) {
+
+        console.log("user values", user.values);
+        console.log("created", created);
+
         if (!user_query) {
             // query the db for the given username
             if (!user) {
@@ -122,25 +129,48 @@ function authenticate(name, pass, fn) {
     });
 }
 
-app.post('/register', function(req, res){
-    authenticate(req.body.username, req.body.password, function(err, user){
-        if (user) {
-            // Regenerate session when signing in
-            // to prevent fixation
-            req.session.regenerate(function() {
-                // Store the user's primary key
-                // in the session store to be retrieved,
-                // or in this case the entire user object
-                req.session.user = user;
-                res.redirect('back');
-            });
-        } else {
-            req.session.error = 'Authentication failed, please check your '
-                + ' username and password.';
-            res.redirect('login');
-        }
-    });
-});
+// app.post('/register', function(req, res){
+//     // Cross Domain Communication
+//     res.header('Access-Control-Allow-Origin', 'http://localhost');
+//     res.header('Access-Control-Allow-Methods', 'GET, POST');
+
+//     console.log("REQUEST BODY: ", req.body);
+
+//     req.body.password =
+
+//     User.findOrCreate(req.body).success(function(user, created) {
+
+//         user.password = user_query.password;
+
+//         if (user.password == hash(pass,user_query.salt)) return fn(null, user);
+
+//         console.log("USER: ", user.values)
+//         console.log("CREATED: ", created)
+//     });
+
+//     // authenticate(req.body.username, req.body.password, function(err, user){
+//     //     if (user) {
+
+//     //         console.log('IF USER')
+
+//     //         // Regenerate session when signing in
+//     //         // to prevent fixation
+//     //         req.session.regenerate(function() {
+//     //             // Store the user's primary key
+//     //             // in the session store to be retrieved,
+//     //             // or in this case the entire user object
+//     //             req.session.user = user;
+//     //             res.redirect('back');
+//     //         });
+//     //     } else {
+//     //         console.log('ELSE Auth failed')
+
+//     //         req.session.error = 'Authentication failed, please check your '
+//     //             + ' username and password.';
+//     //         res.redirect('login');
+//     //     }
+//     // });
+// });
 
 
 /*
@@ -160,13 +190,13 @@ function makesalt()
 }
 
 // Register, Save user into MySQL
-function register(name, pass, fn) {
+function register(name, pass, email, fn) {
     if (!module.parent) console.log('registering %s:%s', name, pass);
 
     var salt = makesalt();
 
     User
-        .build({ username: name, password: hash(pass,salt), salt: salt })
+        .findOrCreate({ username: name, email: email, password: hash(pass,salt), salt: salt })
         .save()
         .success(function(user_query) {
             user = new Object();
@@ -180,7 +210,11 @@ function register(name, pass, fn) {
 
 // Register our new user
 app.post('/register', function(req, res){
-    register(req.body.username, req.body.password, function(err, user){
+
+    res.header('Access-Control-Allow-Origin', 'http://localhost');
+    res.header('Access-Control-Allow-Methods', 'GET, POST');
+
+    register(req.body.username, req.body.password, req.body.email, function(err, user) {
         if (user) {
             // Regenerate session when signing in
             // to prevent fixation
@@ -190,7 +224,8 @@ app.post('/register', function(req, res){
                 // or in this case the entire user object
                 req.session.error = 'Registration should have succeded.';
                 req.session.user = user;
-                res.redirect('/restricted');
+
+                // res.redirect('/restricted');
             });
         } else {
             req.session.error = 'Registration Failed.';
