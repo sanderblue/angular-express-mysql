@@ -3,12 +3,8 @@ var express   = require('express'),
     http      = require('http'),
     crypto    = require('crypto'),
     mysql     = require('mysql'),
-
     routes    = require('./src/routes'),
     api       = require('./src/routes/api'),
-    // database  = require('./src/database'),
-    // models    = require('./src/models.js'),
-
     app       = module.exports = express();
     Sequelize = require(__dirname + '/node_modules/sequelize/index');
 
@@ -48,6 +44,7 @@ var sequelize = new Sequelize('angularexpress', 'root', 'password', {
 
 // Import our User model
 var User = sequelize.import(__dirname + '/src/models/user');
+
 
 // Automaticaly generates the user table
 User.sync();
@@ -96,10 +93,11 @@ function hash(msg, key) {
         .digest('hex');
 }
 
+
 // Authenticate using MySQL
 function authenticate(name, pass, fn) {
 
-    console.log('Authenticate: ', name, pass)
+    console.log('Authenticate: ', name, pass);
 
     if (!module.parent) console.log('authenticating %s:%s', name, pass);
     var user;
@@ -129,9 +127,11 @@ function authenticate(name, pass, fn) {
     });
 }
 
+
 /*
     User Registration
 */
+
 
 //Generates user specific salt (Prevent Rainbow Table Attacks)
 function makesalt()
@@ -145,6 +145,7 @@ function makesalt()
     return text;
 }
 
+
 // Register, Save user into MySQL
 function register(name, pass, email, fn) {
     if (!module.parent) console.log('registering %s:%s', name, pass);
@@ -152,7 +153,12 @@ function register(name, pass, email, fn) {
     var salt = makesalt();
 
     User
-        .findOrCreate({ username: name, email: email, password: hash(pass,salt), salt: salt })
+        .findOrCreate({
+            username: name,
+            email: email,
+            password: hash(pass,salt),
+            salt: salt
+        })
         .save()
         .success(function(user_query) {
             user = new Object();
@@ -161,8 +167,9 @@ function register(name, pass, email, fn) {
             user.password = user_query.password;
 
             return fn(null, user);
-        })
+        });
 }
+
 
 // Register our new user
 app.post('/register', function(req, res){
