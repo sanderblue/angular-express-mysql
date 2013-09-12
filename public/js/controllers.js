@@ -15,7 +15,7 @@ function RegistrationCtrl($scope, $http) {
 
     $scope.user = {};
 
-    $scope.createUser = function() {
+    $scope.register = function() {
 
         console.log('USER DATA FROM CLIENT: ', $scope.user);
 
@@ -23,7 +23,7 @@ function RegistrationCtrl($scope, $http) {
 
         $http({
             method : 'POST',
-            url : 'http://localhost:3000/createuser',
+            url : 'http://localhost:3000/register',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -52,7 +52,7 @@ function RegistrationCtrl($scope, $http) {
     }
 
     // $scope.list = function() {
-    //     var url = 'http://localhost:3000/createuser'; // URL where our Node.js server is running
+    //     var url = 'http://localhost:3000/register'; // URL where our Node.js server is running
 
     //     $http.get(url).success(function(data) {
     //         $scope.users = data;
