@@ -10,7 +10,7 @@ var express   = require('express'),
 
 
 // Configuration
-app.configure(function(){
+app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
@@ -25,11 +25,11 @@ app.configure(function(){
     app.use(app.router);
 });
 
-app.configure('development', function(){
+app.configure('development', function() {
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
-app.configure('production', function(){
+app.configure('production', function() {
     app.use(express.errorHandler());
 });
 
@@ -52,7 +52,7 @@ User.sync();
 
 
 // Session-persisted message middleware
-app.use(function(req,res){
+app.use(function (req, res){
     var err = req.session.error,
         msg = req.session.success,
         user = req.session.user;
@@ -103,7 +103,7 @@ function authenticate(name, pass, fn) {
     var user;
     User.findOrCreate({
         where: { username: name },
-    }).success(function(user_query, created) {
+    }).success(function (user_query, created) {
 
         console.log("user values", user.values);
         console.log("created", created);
@@ -160,7 +160,7 @@ function register(name, pass, email, fn) {
             salt: salt
         })
         .save()
-        .success(function(user_query) {
+        .success(function (user_query) {
             user = new Object();
             user.id = user_query.id;
             user.username = user_query.username;
@@ -181,7 +181,7 @@ app.post('/register', function(req, res){
         if (user) {
             // Regenerate session when signing in
             // to prevent fixation
-            req.session.regenerate(function(){
+            req.session.regenerate(function () {
                 // Store the user's primary key
                 // in the session store to be retrieved,
                 // or in this case the entire user object
