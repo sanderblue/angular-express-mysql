@@ -47,7 +47,7 @@ var sequelize = new Sequelize('angularexpress', 'root', 'password', {
 
 
 // Import our User model
-var User = sequelize.import(__dirname + '/models/user');
+var User = sequelize.import(__dirname + '/src/models/user');
 
 // Automaticaly generates the user table
 User.sync();
