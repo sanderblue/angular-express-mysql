@@ -55,7 +55,7 @@ User.sync();
 
 
 // Session-persisted message middleware
-app.locals.use(function(req,res){
+app.use(function(req,res){
     var err = req.session.error,
         msg = req.session.success,
         user = req.session.user;
@@ -122,7 +122,7 @@ function authenticate(name, pass, fn) {
     });
 }
 
-app.post('/', function(req, res){
+app.post('/register', function(req, res){
     authenticate(req.body.username, req.body.password, function(err, user){
         if (user) {
             // Regenerate session when signing in
