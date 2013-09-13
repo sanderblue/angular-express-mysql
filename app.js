@@ -100,7 +100,9 @@ function authenticate(name, pass, fn) {
     console.log('Authenticate: ', name, pass);
 
     if (!module.parent) console.log('authenticating %s:%s', name, pass);
+
     var user;
+
     User.findOrCreate({
         where: { username: name },
     }).success(function (user_query, created) {
