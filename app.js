@@ -161,7 +161,6 @@ function register(name, pass, email, fn) {
             password: hash(pass,salt),
             salt: salt
         })
-        .save()
         .success(function (user_query) {
             user = new Object();
             user.id = user_query.id;
