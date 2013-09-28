@@ -1,4 +1,4 @@
-// Module dependencies
+    // Module dependencies
 var express   = require('express'),
     http      = require('http'),
     crypto    = require('crypto'),
@@ -198,6 +198,33 @@ app.post('/register', function(req, res){
     });
 });
 
+
+app.get('/register', function(req, res){
+
+    console.log("request made: ", req);
+
+    res.header('Access-Control-Allow-Origin', 'http://localhost');
+    res.header('Access-Control-Allow-Methods', 'GET');
+
+    register(req.body.username, req.body.password, req.body.email, function(err, user) {
+        if (user) {
+            // Regenerate session when signing in
+            // to prevent fixation
+            req.session.regenerate(function () {
+                // Store the user's primary key
+                // in the session store to be retrieved,
+                // or in this case the entire user object
+                req.session.error = 'Registration should have succeded.';
+                req.session.user = user;
+
+                // res.redirect('/restricted');
+            });
+        } else {
+            req.session.error = 'Registration Failed.';
+            res.redirect('index');
+        }
+    });
+});
 
 // Start the server
 if (!module.parent) {

@@ -40,9 +40,8 @@ block body
                                 div(class="form-group")
                                     input(type="password" ng-model="user.password" class='form-control' placeholder='Password')
 
-                                button(ng-click="reset()" class="btn btn-sm btn-primary btn-block") Reset
                                 button(type="submit" class="btn btn-sm btn-primary btn-block btn-register") Register
-
+                                button(ng-click="clearFields()" class="btn btn-sm btn-primary btn-block") Cancel
 
     script(src="js/lib/jquery.min.js")
     script(src="js/lib/bootstrap.min.js")

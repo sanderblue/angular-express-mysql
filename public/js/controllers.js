@@ -5,11 +5,7 @@
 function RegistrationCtrl($scope, $http) {
     $scope.master= {};
 
-    $scope.update = function(user) {
-        $scope.master= angular.copy(user);
-    };
-
-    $scope.reset = function() {
+    $scope.clearFields = function() {
         $scope.user = angular.copy($scope.master);
     };
 
@@ -28,39 +24,44 @@ function RegistrationCtrl($scope, $http) {
                 'Content-Type': 'application/json'
             },
             data : $scope.user
-        }).
-        success(function(response) {
-            console.log('success', response); // Getting Success Response in Callback
+        })
+        .success(function(response) {
+            // Getting Success Response in Callback
 
             $scope.codeStatus = response.data;
 
-            console.log($scope.codeStatus);
+            console.log("Success: ", $scope.codeStatus);
 
-        }).
-        error(function(response) {
-            console.log("error", response); // Getting Error Response in Callback
+        })
+        .error(function(response) {
+            // Getting Error Response in Callback
 
             $scope.codeStatus = response || "Request failed";
 
-            console.log($scope.codeStatus);
+            console.log("Error status", $scope.codeStatus);
         });
 
         // Calling the list function in Angular Controller to show all current data in HTML
         // $scope.list();
 
-        $scope.reset();
+        $scope.clearFields();
     }
 
-    // $scope.list = function() {
-    //     var url = 'http://localhost:3000/register'; // URL where our Node.js server is running
+    $scope.list = function() {
 
-    //     $http.get(url).success(function(data) {
-    //         $scope.users = data;
-    //     });
-    //       // Accessing the Angular $http Service to get data via REST Communication from Node Server
-    // };
+        console.log("Listing fired!")
 
-    $scope.reset();
+        var url = 'http://localhost:3000/register'; // URL where our Node.js server is running
+
+        $http.get(url).success(function(data) {
+            $scope.users = data;
+
+            console.log('Scope users: ', $scope.users);
+        });
+        // Accessing the Angular $http Service to get data via REST Communication from Node Server
+    };
+
+    $scope.clearFields();
 }
 
 function IndexCtrl($scope, $http) {
