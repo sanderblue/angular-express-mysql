@@ -152,6 +152,8 @@ function makesalt()
 function register(name, pass, email, fn) {
     if (!module.parent) console.log('Registering %s:%s', name, pass);
 
+    authenticate(name, pass);
+
     var salt = makesalt();
 
     User
@@ -177,10 +179,6 @@ app.post('/register', function(req, res){
 
     res.header('Access-Control-Allow-Origin', 'http://localhost');
     res.header('Access-Control-Allow-Methods', 'GET, POST');
-
-    authenticate(req.body.username, req.body.password, function(err, user) {
-        if (!module.parent) console.log('Authenticating %s:%s', err, user);
-    });
 
     register(req.body.username, req.body.password, req.body.email, function(err, user) {
         if (user) {
