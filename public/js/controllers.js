@@ -41,10 +41,7 @@ function RegistrationCtrl($scope, $http) {
             console.log("Error status", $scope.codeStatus);
         });
 
-        // Calling the list function in Angular Controller to show all current data in HTML
-        // $scope.list();
-
-        $scope.clearFields();
+        // $scope.clearFields();
     }
 
     $scope.list = function() {
@@ -60,8 +57,6 @@ function RegistrationCtrl($scope, $http) {
         });
         // Accessing the Angular $http Service to get data via REST Communication from Node Server
     };
-
-    $scope.clearFields();
 }
 
 function IndexCtrl($scope, $http) {

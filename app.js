@@ -99,7 +99,7 @@ function authenticate(name, pass, fn) {
 
     console.log('Authenticate: ', name, pass);
 
-    if (!module.parent) console.log('authenticating %s:%s', name, pass);
+    if (!module.parent) console.log('Authenticating %s:%s', name, pass);
 
     var user;
 
@@ -150,7 +150,7 @@ function makesalt()
 
 // Register, Save user into MySQL
 function register(name, pass, email, fn) {
-    if (!module.parent) console.log('registering %s:%s', name, pass);
+    if (!module.parent) console.log('Registering %s:%s', name, pass);
 
     var salt = makesalt();
 
@@ -177,6 +177,10 @@ app.post('/register', function(req, res){
 
     res.header('Access-Control-Allow-Origin', 'http://localhost');
     res.header('Access-Control-Allow-Methods', 'GET, POST');
+
+    authenticate(req.body.username, req.body.password, function(err, user) {
+        if (!module.parent) console.log('Authenticating %s:%s', err, user);
+    });
 
     register(req.body.username, req.body.password, req.body.email, function(err, user) {
         if (user) {
