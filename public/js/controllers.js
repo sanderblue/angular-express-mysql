@@ -29,15 +29,16 @@ function RegistrationCtrl($scope, $http) {
             // Getting Success Response in Callback
             console.log('Success: ', response);
 
+            $scope.username = response.username;
+            $scope.codeStatus = response;
+
             $('#myModal').modal('toggle');
             $('.alert').fadeIn();
-
-            $scope.newUsername = response.username;
-            $scope.codeStatus = response;
+            
+            console.log('new user: ', $scope.username);
         })
         .error(function(response) {
             // Getting Error Response in Callback
-
             $scope.codeStatus = response || 'Request failed';
 
             console.log('Error status', $scope.codeStatus);
