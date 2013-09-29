@@ -6,7 +6,7 @@ function RegistrationCtrl($scope, $http) {
     $scope.master= {};
 
     $scope.clearFields = function() {
-        $scope.user = angular.copy($scope.master);
+        $scope.user = {};
     };
 
     $scope.user = {};
@@ -32,8 +32,8 @@ function RegistrationCtrl($scope, $http) {
             $('#myModal').modal('toggle');
             $('.alert').fadeIn();
 
+            $scope.newUsername = response.username;
             $scope.codeStatus = response;
-
         })
         .error(function(response) {
             // Getting Error Response in Callback
@@ -43,7 +43,7 @@ function RegistrationCtrl($scope, $http) {
             console.log('Error status', $scope.codeStatus);
         });
 
-        // $scope.clearFields();
+        $scope.clearFields();
     }
 
     $scope.list = function() {
