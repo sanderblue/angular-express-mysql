@@ -152,25 +152,34 @@ function makesalt()
 function register(name, pass, email, fn) {
     if (!module.parent) console.log('Registering %s:%s', name, pass);
 
-    authenticate(name, pass);
-
     var salt = makesalt();
 
-    User
-        .findOrCreate({
-            username: name,
-            email: email,
-            password: hash(pass,salt),
-            salt: salt
-        })
-        .success(function (user_query) {
-            user = new Object();
-            user.id = user_query.id;
-            user.username = user_query.username;
-            user.password = user_query.password;
+    User.findAll({
+        where: {
+            username: name
+        }
+    }).success(function (user) {
+        if (user.length == 0) {
+            console.log("No matches found, okay to create new user.");
 
-            return fn(null, user);
-        });
+            User.create({
+                username: name,
+                email: email,
+                password: hash(pass,salt),
+                salt: salt
+            })
+            .success(function (user_query) {
+                user = new Object();
+                user.id = user_query.id;
+                user.username = user_query.username;
+                user.password = user_query.password;
+
+                return fn(null, user);
+            });
+        } else {
+            console.log("This user already exists!!!")
+        }
+    });
 }
 
 
