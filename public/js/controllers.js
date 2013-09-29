@@ -27,10 +27,9 @@ function RegistrationCtrl($scope, $http) {
         })
         .success(function(response) {
             // Getting Success Response in Callback
+            console.log("Success: ", response);
 
             $scope.codeStatus = response.data;
-
-            console.log("Success: ", $scope.codeStatus);
 
         })
         .error(function(response) {

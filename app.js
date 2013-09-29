@@ -188,21 +188,24 @@ app.post('/register', function(req, res){
     res.header('Access-Control-Allow-Methods', 'GET, POST');
 
     register(req.body.username, req.body.password, req.body.email, function(err, user) {
+        console.log('New user registered: ', user);
         if (user) {
+
+            res.send(req.body);
             // Regenerate session when signing in
             // to prevent fixation
-            req.session.regenerate(function () {
-                // Store the user's primary key
-                // in the session store to be retrieved,
-                // or in this case the entire user object
-                req.session.error = 'Registration should have succeded.';
-                req.session.user = user;
+            // req.session.regenerate(function () {
+            //     // Store the user's primary key
+            //     // in the session store to be retrieved,
+            //     // or in this case the entire user object
+            //     req.session.error = 'Registration should have succeded.';
+            //     req.session.user = user;
 
-                // res.redirect('/restricted');
-            });
+            //     // res.redirect('/');
+            // });
         } else {
             req.session.error = 'Registration Failed.';
-            res.redirect('index');
+            res.redirect('/');
         }
     });
 });
