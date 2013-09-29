@@ -155,9 +155,7 @@ function register(name, pass, email, fn) {
     var salt = makesalt();
 
     User.findAll({
-        where: {
-            username: name
-        }
+        where : ['username = ? or email = ?', name, email]
     }).success(function (user) {
         if (user.length == 0) {
             console.log("No matches found, okay to create new user.");
