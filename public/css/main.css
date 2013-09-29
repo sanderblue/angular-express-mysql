@@ -392,3 +392,8 @@ body {
 .col-md-4.form-holder {
   float: none;
 }
+
+/* line 1, ../sass/partials/_alerts.scss */
+.alert {
+  display: none;
+}

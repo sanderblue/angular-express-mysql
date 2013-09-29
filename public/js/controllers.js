@@ -27,7 +27,10 @@ function RegistrationCtrl($scope, $http) {
         })
         .success(function(response) {
             // Getting Success Response in Callback
-            console.log("Success: ", response);
+            console.log('Success: ', response);
+
+            $('#myModal').modal('toggle');
+            $('.alert').fadeIn();
 
             $scope.codeStatus = response;
 
@@ -35,9 +38,9 @@ function RegistrationCtrl($scope, $http) {
         .error(function(response) {
             // Getting Error Response in Callback
 
-            $scope.codeStatus = response || "Request failed";
+            $scope.codeStatus = response || 'Request failed';
 
-            console.log("Error status", $scope.codeStatus);
+            console.log('Error status', $scope.codeStatus);
         });
 
         // $scope.clearFields();
@@ -45,7 +48,7 @@ function RegistrationCtrl($scope, $http) {
 
     $scope.list = function() {
 
-        console.log("Listing fired!")
+        console.log('Listing fired!')
 
         var url = 'http://localhost:3000/register'; // URL where our Node.js server is running
 
