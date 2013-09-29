@@ -29,7 +29,7 @@ function RegistrationCtrl($scope, $http) {
             // Getting Success Response in Callback
             console.log("Success: ", response);
 
-            $scope.codeStatus = response.data;
+            $scope.codeStatus = response;
 
         })
         .error(function(response) {

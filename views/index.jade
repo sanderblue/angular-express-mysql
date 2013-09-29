@@ -11,6 +11,9 @@ block navigation
 block body
     div(class="container main-container")
 
+        div(class="alert alert-success alert-dismissable") Username, you succesfully registered. Please sign in below.
+            button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
+
         form(class="form-signin" action="/login" method="post")
             h2(class="form-signin-heading") Please sign in
             input(type="text" class="form-control" placeholder="Email address" autofocus)
@@ -40,8 +43,8 @@ block body
                                 div(class="form-group")
                                     input(type="password" ng-model="user.password" class='form-control' placeholder='Password')
 
-                                button(type="submit" class="btn btn-sm btn-primary btn-block btn-register") Register
-                                button(ng-click="clearFields()" class="btn btn-sm btn-primary btn-block") Cancel
+                                button(type="submit" class="btn btn-sm btn-primary btn-block btn-register" data-dismiss="modal") Register
+                                button(ng-click="clearFields()" class="btn btn-sm btn-primary btn-block" data-dismiss="modal") Cancel
 
     script(src="js/lib/jquery.min.js")
     script(src="js/lib/bootstrap.min.js")
