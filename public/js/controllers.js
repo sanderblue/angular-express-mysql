@@ -34,8 +34,6 @@ function RegistrationCtrl($scope, $http) {
 
             $('#myModal').modal('toggle');
             $('.alert').fadeIn();
-            
-            console.log('new user: ', $scope.username);
         })
         .error(function(response) {
             // Getting Error Response in Callback
@@ -68,20 +66,33 @@ function IndexCtrl($scope, $http) {
     });
 }
 
-function AddPostCtrl($scope, $http, $location) {
-  $scope.form = {};
+function LoginController($scope, $http, $location) {
+    $scope.user = {};
 
-  $scope.submitPost = function () {
-        $http.post('/api/post', $scope.form).
-        success(function(data) {
-            $location.path('/');
+    $scope.clearFields = function() {
+        $scope.user = {};
+    };
+
+    $scope.login = function () {
+
+        console.log('LOGIN!!!!', $scope.user);
+
+        $http.post('/login', $scope.user)
+        .success(function(res) {
+            
+            console.log("SUCCESS Login Response: ", res);    
+
+            // $location.path('/');
+        })
+        .error(function(err) {
+            console.error('ERROR: ', err);
         });
     };
 }
 
 function ReadPostCtrl($scope, $http, $routeParams) {
-    $http.get('/api/post/' + $routeParams.id).
-    success(function(data) {
+    $http.get('/api/post/' + $routeParams.id)
+    .success(function(data) {
         $scope.post = data.post;
     });
 }

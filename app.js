@@ -95,25 +95,25 @@ function hash(msg, key) {
 
 
 // Authenticate using MySQL
-function authenticate(name, pass, fn) {
+function authenticate(email, pass, fn) {
 
-    console.log('Authenticate: ', name, pass);
+    console.log('Authenticate: ', email, pass);
 
-    if (!module.parent) console.log('Authenticating %s:%s', name, pass);
+    if (!module.parent) console.log('Authenticating %s:%s', email, pass);
 
     var user;
 
-    User.findOrCreate({
-        where: { username: name },
+    User.find({
+        where: { email: email },
     }).success(function (user_query, created) {
 
-        console.log("user values", user.values);
-        console.log("created", created);
+        // console.log("Finding user: ", email.values);
+        console.log("Finding created? ", created);
 
         if (!user_query) {
-            // query the db for the given username
+            // query the db for the given email
             if (!user) {
-                console.log("No User By That Name");
+                console.log("No User By That Email");
                 return fn(new Error('Cannot find user'));
             }
         } else {
@@ -122,7 +122,11 @@ function authenticate(name, pass, fn) {
             user.id = user_query.id;
             user.username = user_query.username;
             user.password = user_query.password;
-            if (user.password == hash(pass,user_query.salt)) return fn(null, user);
+
+            if (user.password == hash(pass,user_query.salt)) {
+                return fn(null, user);
+            }
+
             console.log("Invalid Password.");
             fn(new Error('Invalid password'));
         }
@@ -201,32 +205,46 @@ app.post('/register', function(req, res){
 });
 
 
-app.get('/register', function(req, res){
-
-    console.log("request made: ", req);
+// Basic login
+app.post('/login', function (req, res) {
 
     res.header('Access-Control-Allow-Origin', 'http://localhost');
-    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Methods', 'GET, POST');
 
-    register(req.body.username, req.body.password, req.body.email, function(err, user) {
+    var post = req.body;
+
+    console.log('\n\n LOGIN REQUEST: \n\n', req.body, res, "Request: ", req);
+
+    authenticate(req.body.email, req.body.password, function(err, user) {
+
+        console.log("Auth ERROR: ", err, "USER: ", user);
+
         if (user) {
-            // Regenerate session when signing in
-            // to prevent fixation
-            req.session.regenerate(function () {
-                // Store the user's primary key
-                // in the session store to be retrieved,
-                // or in this case the entire user object
-                req.session.error = 'Registration should have succeded.';
-                req.session.user = user;
+                // Regenerate session when signing in
+                // to prevent fixation 
+                req.session.regenerate(function() {
 
-                // res.redirect('/restricted');
-            });
-        } else {
-            req.session.error = 'Registration Failed.';
-            res.redirect('index');
-        }
+                    console.log('Regenerated the session.');
+
+                    // Store the user's primary key 
+                    // in the session store to be retrieved,
+                    // or in this case the entire user object
+                    req.session.user = user;
+                    req.session.success = 'Authenticated as ' + user.name
+                        + ' click to <a href="/logout">logout</a>. '
+                        + ' You may now access <a href="/restricted">/restricted</a>.';
+                    
+                    // res.redirect('back');
+              });
+            } else {
+              req.session.error = 'Authentication failed, please check your '
+                + ' username and password.'
+                + ' (use "tj" and "foobar")';
+              res.redirect('login');
+            }
     });
 });
+
 
 // Start the server
 if (!module.parent) {

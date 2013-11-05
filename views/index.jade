@@ -14,14 +14,14 @@ block body
         div(ng-controller="RegistrationCtrl" class="alert alert-success alert-dismissable alert-registation-success fade in") Succesfully registered. Please sign in below.
             button(type="button" class="close" data-dismiss="alert" aria-hidden="true") &times;
 
-        form(class="form-signin" action="/login" method="post")
-            h2(class="form-signin-heading") Please sign in
-            input(type="text" class="form-control" placeholder="Email address" autofocus)
-            input(type="password" class="form-control" placeholder="Password")
-            label(class="checkbox") Remember me
-                input(type="checkbox" value="remember-me")
-
-            button(class="btn btn-lg btn-primary btn-block" type="submit") Sign in
+        div(ng-controller="LoginController" ng-submit="login()")
+            form(class="form-signin" role="form")
+                h2(class="form-signin-heading") Please sign in
+                input(ng-model="user.email" type="email" class="form-control" placeholder="Email address" autofocus)
+                input(ng-model="user.password" type="password" class="form-control" placeholder="Password")
+                label(class="checkbox") Remember me
+                    input(type="checkbox" value="remember-me")
+                button(class="btn btn-lg btn-primary btn-block" type="submit") Sign in
 
         div(class="col-md-2 col-md-offset-5")
             button(type="button" class="btn btn-md btn-primary btn-block" data-toggle="modal" data-target="#myModal") Register
