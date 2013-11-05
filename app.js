@@ -155,7 +155,7 @@ function register(name, pass, email, fn) {
     var salt = makesalt();
 
     User.findAll({
-        where : ['username = ? or email = ?', name, email]
+        where: ['username = ? or email = ?', name, email]
     }).success(function (user) {
         if (user.length == 0) {
             console.log("No matches found, okay to create new user.");
@@ -175,7 +175,7 @@ function register(name, pass, email, fn) {
                 return fn(null, user);
             });
         } else {
-            console.log("This user already exists!!!")
+            console.error("This user already exists!!!")
         }
     });
 }
@@ -188,21 +188,11 @@ app.post('/register', function(req, res){
     res.header('Access-Control-Allow-Methods', 'GET, POST');
 
     register(req.body.username, req.body.password, req.body.email, function(err, user) {
-        console.log('New user registered: ', user);
         if (user) {
+            
+            console.log('New user registered: ', user);
 
             res.send(req.body);
-            // Regenerate session when signing in
-            // to prevent fixation
-            // req.session.regenerate(function () {
-            //     // Store the user's primary key
-            //     // in the session store to be retrieved,
-            //     // or in this case the entire user object
-            //     req.session.error = 'Registration should have succeded.';
-            //     req.session.user = user;
-
-            //     // res.redirect('/');
-            // });
         } else {
             req.session.error = 'Registration Failed.';
             res.redirect('/');
