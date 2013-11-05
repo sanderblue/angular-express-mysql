@@ -67,8 +67,14 @@ function IndexCtrl($scope, $http) {
 }
 
 function RestrictedCtrl($scope, $http) {
-    $http.get('/restricted').success(function(data, status, headers, config) {
+    console.log('Test',$scope);
+
+    $http.get('/restricted')
+    .success(function(data, status, headers, config) {
         console.log("Logged in?", data, status, headers, config)
+    })
+    .error(function(err) { 
+        console.log(err);
     });
 }
 
@@ -79,10 +85,7 @@ function LoginController($scope, $http, $location) {
         $scope.user = {};
     };
 
-    $scope.login = function () {
-
-        console.log('LOGIN!!!!', $scope.user);
-
+    $scope.login = function() {
         $http.post('/login', $scope.user)
         .success(function(res) {
             
@@ -93,46 +96,5 @@ function LoginController($scope, $http, $location) {
         .error(function(err) {
             console.error('ERROR: ', err);
         });
-    };
-}
-
-function ReadPostCtrl($scope, $http, $routeParams) {
-    $http.get('/api/post/' + $routeParams.id)
-    .success(function(data) {
-        $scope.post = data.post;
-    });
-}
-
-function EditPostCtrl($scope, $http, $location, $routeParams) {
-    $scope.form = {};
-
-    $http.get('/api/post/' + $routeParams.id).
-    success(function(data) {
-        $scope.form = data.post;
-    });
-
-    $scope.editPost = function () {
-        $http.put('/api/post/' + $routeParams.id, $scope.form).
-        success(function(data) {
-            $location.url('/readPost/' + $routeParams.id);
-        });
-    };
-}
-
-function DeletePostCtrl($scope, $http, $location, $routeParams) {
-    $http.get('/api/post/' + $routeParams.id).
-    success(function(data) {
-        $scope.post = data.post;
-    });
-
-    $scope.deletePost = function () {
-        $http.delete('/api/post/' + $routeParams.id).
-            success(function(data) {
-            $location.url('/');
-        });
-    };
-
-    $scope.home = function () {
-        $location.url('/');
     };
 }

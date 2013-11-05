@@ -69,7 +69,7 @@ app.use(function (req, res){
 
 // Routes
 app.get('/', routes.index);
-app.get('/restricted', routes.restricted);
+// app.get('/restricted', routes.restricted);
 
 // User login in and restriction supports
 function restrict(req, res, next) {
@@ -219,7 +219,7 @@ app.post('/login', function (req, res) {
                     // or in this case the entire user object
                     req.session.user = user;
                     
-                    res.redirect('/restricted');
+                    // res.redirect('/restricted');
                     res.send(user);
               });
             } else {
