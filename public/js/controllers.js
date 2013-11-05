@@ -66,6 +66,12 @@ function IndexCtrl($scope, $http) {
     });
 }
 
+function RestrictedCtrl($scope, $http) {
+    $http.get('/restricted').success(function(data, status, headers, config) {
+        console.log("Logged in?", data, status, headers, config)
+    });
+}
+
 function LoginController($scope, $http, $location) {
     $scope.user = {};
 
@@ -82,7 +88,7 @@ function LoginController($scope, $http, $location) {
             
             console.log("SUCCESS Login Response: ", res);    
 
-            // $location.path('/');
+            $location.url('/restricted');
         })
         .error(function(err) {
             console.error('ERROR: ', err);

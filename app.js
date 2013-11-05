@@ -1,4 +1,4 @@
-    // Module dependencies
+// Module dependencies
 var express   = require('express'),
     http      = require('http'),
     crypto    = require('crypto'),
@@ -69,10 +69,7 @@ app.use(function (req, res){
 
 // Routes
 app.get('/', routes.index);
-app.get('/restricted', restrict, function(req, res){
-    res.render('restricted');
-});
-
+app.get('/restricted', routes.restricted);
 
 // User login in and restriction supports
 function restrict(req, res, next) {
@@ -106,10 +103,6 @@ function authenticate(email, pass, fn) {
     User.find({
         where: { email: email },
     }).success(function (user_query, created) {
-
-        // console.log("Finding user: ", email.values);
-        console.log("Finding created? ", created);
-
         if (!user_query) {
             // query the db for the given email
             if (!user) {
@@ -211,14 +204,9 @@ app.post('/login', function (req, res) {
     res.header('Access-Control-Allow-Origin', 'http://localhost');
     res.header('Access-Control-Allow-Methods', 'GET, POST');
 
-    var post = req.body;
-
-    console.log('\n\n LOGIN REQUEST: \n\n', req.body, res, "Request: ", req);
+    console.log('\n\n\n LOGIN REQUEST \n');
 
     authenticate(req.body.email, req.body.password, function(err, user) {
-
-        console.log("Auth ERROR: ", err, "USER: ", user);
-
         if (user) {
                 // Regenerate session when signing in
                 // to prevent fixation 
@@ -230,17 +218,13 @@ app.post('/login', function (req, res) {
                     // in the session store to be retrieved,
                     // or in this case the entire user object
                     req.session.user = user;
-                    req.session.success = 'Authenticated as ' + user.name
-                        + ' click to <a href="/logout">logout</a>. '
-                        + ' You may now access <a href="/restricted">/restricted</a>.';
                     
-                    // res.redirect('back');
+                    res.redirect('/restricted');
+                    res.send(user);
               });
             } else {
-              req.session.error = 'Authentication failed, please check your '
-                + ' username and password.'
-                + ' (use "tj" and "foobar")';
-              res.redirect('login');
+              req.session.error = 'Authentication failed, please check your credentials.';
+              res.redirect('/login');
             }
     });
 });

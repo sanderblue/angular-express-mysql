@@ -8,6 +8,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
                 templateUrl: 'partials/index',
                 controller: IndexCtrl
             }).
+            when('/restricted', {
+                templateUrl: 'restricted',
+                controller: RestrictedCtrl
+            }).
             when('/readPost/:id', {
                 templateUrl: 'partials/readPost',
                 controller: ReadPostCtrl
