@@ -4,7 +4,6 @@ var express   = require('express'),
     crypto    = require('crypto'),
     mysql     = require('mysql'),
     routes    = require('./src/routes'),
-    api       = require('./src/routes/api'),
     app       = module.exports = express();
     Sequelize = require(__dirname + '/node_modules/sequelize/index');
 
