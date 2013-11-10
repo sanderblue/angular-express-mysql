@@ -129,6 +129,12 @@ body {
   padding: 0;
 }
 
+/* line 35, ../sass/partials/_content.scss */
+label.checkbox {
+  font-size: 14px;
+  line-height: 20px;
+}
+
 /* line 1, ../sass/partials/_navigation.scss */
 .navbar {
   background: transparent;
@@ -396,4 +402,14 @@ body {
 /* line 1, ../sass/partials/_alerts.scss */
 .alert {
   display: none;
+}
+
+/* line 1, ../sass/partials/_modals.scss */
+body.modal-open {
+  margin-right: 0px;
+}
+
+/* line 2, ../sass/partials/_modals.scss */
+.modal-open .navbar-fixed-top {
+  margin-right: 0px;
 }
