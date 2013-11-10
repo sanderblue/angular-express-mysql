@@ -3,6 +3,7 @@ var express   = require('express'),
     http      = require('http'),
     crypto    = require('crypto'),
     mysql     = require('mysql'),
+    jade      = require('jade'),
     system    = require('./src/config/console.js'),
     routes    = require('./src/routes'),
     app       = module.exports = express();
@@ -200,6 +201,7 @@ app.post('/register', function(req, res){
 // Basic login
 app.post('/login', function (req, res) {
 
+    res.contentType('application/json');
     res.header('Access-Control-Allow-Origin', 'http://localhost');
     res.header('Access-Control-Allow-Methods', 'GET, POST');
 
@@ -207,25 +209,28 @@ app.post('/login', function (req, res) {
 
     authenticate(req.body.email, req.body.password, function(err, user) {
         if (user) {
-
             system.log("USER", user);
-                // Regenerate session when signing in
-                // to prevent fixation 
-                req.session.regenerate(function() {
 
-                    system.log('Regenerated the session.');
+            // Regenerate session when signing in
+            // to prevent fixation 
+            req.session.regenerate(function() {
+                system.log('Regenerated the session.');
 
-                    // Store the user's primary key 
-                    // in the session store to be retrieved,
-                    // or in this case the entire user object
-                    req.session.user = user;
-                    
-                    res.redirect('/restricted');
-              });
-            } else {
-              req.session.error = 'Authentication failed, please check your credentials.';
-              res.redirect('/login');
-            }
+                var response = {
+                    route: '/',
+                    user: user
+                }
+
+                // Store the user's primary key 
+                // in the session store to be retrieved,
+                // or in this case the entire user object
+                req.session.user = user;
+                res.send(response);
+            });
+        } else {
+          req.session.error = 'Authentication failed, please check your credentials.';
+          res.redirect('/login');
+        }
     });
 });
 
