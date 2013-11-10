@@ -72,16 +72,6 @@ app.use(function (req, res){
 app.get('/', routes.index);
 app.get('/restricted', routes.restricted);
 
-// User login in and restriction supports
-function restrict(req, res, next) {
-    if (req.session.user) {
-        next();
-    } else {
-        req.session.error = 'Access denied!';
-        res.redirect('/');
-    }
-}
-
 
 // Used to generate a hash of the plain-text password + salt
 function hash(msg, key) {
@@ -90,7 +80,6 @@ function hash(msg, key) {
         .update(msg)
         .digest('hex');
 }
-
 
 // Authenticate using MySQL
 function authenticate(email, pass, fn) {
@@ -209,13 +198,11 @@ app.post('/login', function (req, res) {
 
     authenticate(req.body.email, req.body.password, function(err, user) {
         if (user) {
-            system.log("USER", user);
+            system.log("User authenticated: ", user);
 
             // Regenerate session when signing in
             // to prevent fixation 
             req.session.regenerate(function() {
-                system.log('Regenerated the session.');
-
                 var response = {
                     route: '/',
                     user: user

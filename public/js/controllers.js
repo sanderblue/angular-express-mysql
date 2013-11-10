@@ -56,10 +56,8 @@ function LoginController($scope, $http, $location) {
     $scope.login = function() {
         $http.post('/login', $scope.user)
         .success(function(res) {
+            console.log("SUCCESS Login Response: ", res);
             
-            console.log("SUCCESS Login Response: ", res);    
-
-            // $location.url('/restricted');
             window.location = res.route;
         })
         .error(function(err) {
