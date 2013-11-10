@@ -54,7 +54,7 @@ function LoginController($scope, $http, $location) {
     $scope.login = function() {
         $http.post('/login', $scope.user)
         .success(function(res) {
-            console.log("SUCCESS Login Response: ", res);
+            console.log('SUCCESS Login Response: ', res);
             
             $scope.user = res.data;
 
@@ -64,4 +64,41 @@ function LoginController($scope, $http, $location) {
             console.error('ERROR: ', err);
         });
     };
+}
+
+function CameraController($scope) {
+    console.log('Index test: ', navigator);
+
+    var video = document.getElementById('MediaStreamVideo');
+
+    $scope.startVideoStream = function() {
+        navigator.webkitGetUserMedia({ video: true, audio: false }, 
+            function(localMediaStream) { // Success
+
+                console.log("Media", localMediaStream);
+
+                video.src = window.webkitURL.createObjectURL(localMediaStream);
+                video.onloadedmetadata = function(e) {
+                    console.log('Meta data loaded', e);
+                };
+            },
+            function(err) { // Failure
+                console.log('getUserMedia failed: Code ' + JSON.stringify(err));
+            }
+        );
+    }
+
+    $scope.stopVideoStream = function() {
+        navigator.webkitGetUserMedia({ video: true, audio: false }, 
+            function(localMediaStream) { // Success
+
+                console.log("Media", localMediaStream);
+            },
+            function(err) { // Failure
+                console.log('getUserMedia failed: Code ' + JSON.stringify(err));
+            }
+        );
+    }
+
+
 }

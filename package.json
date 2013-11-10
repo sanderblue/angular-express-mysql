@@ -3,6 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
+        "ws": "0.4.31",
         "express": "3.4.0",
         "jade": ">= 0.35.0",
         "mysql": "2.0.0-alpha8",

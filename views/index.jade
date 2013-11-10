@@ -9,9 +9,16 @@ block navigation
                         a(class="navbar-logo-holder navigation-logo navigation-logo-main" href="/") AES v0.0.1
 
 block body
-    div(class="container main-container") Welcome, 
-        span(class="username")= user.username
-        . This is your special place. 
+    div(class="container main-container")
+        div(class="welcome-message") Welcome, 
+            span(class="username")= user.username
+            . This is your special place. 
+
+        div(ng-controller="CameraController")
+            video(id="MediaStreamVideo" class="camera-viewport" autoplay)
+
+            button(ng-click="startVideoStream()" class="btn-small") Start
+            button(ng-click="stopVideoStream()" class="btn-small") Stop
 
     script(src="js/lib/jquery.min.js")
     script(src="js/lib/bootstrap.min.js")

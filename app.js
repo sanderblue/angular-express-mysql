@@ -171,7 +171,8 @@ app.post('/login', function (req, res) {
             req.session.regenerate(function() {
                 var response = {
                     route: '/',
-                    user: user
+                    user: user,
+                    message: 'Thank you for registering, ' + user.firstname
                 }
 
                 // Store the user's primary key 

@@ -413,3 +413,9 @@ body.modal-open {
 .modal-open .navbar-fixed-top {
   margin-right: 0px;
 }
+
+/* line 1, ../sass/partials/_camera.scss */
+.camera-viewport {
+  height: 380px;
+  width: 640px;
+}
