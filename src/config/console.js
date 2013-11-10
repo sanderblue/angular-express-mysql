@@ -10,10 +10,9 @@ exports.log = function(string, data) {
     
     } else {
     
-        if (data instanceof Array) {
+        if (data instanceof Array || data instanceof Object) {
             console.log(
-                '\n' + string, 
-                '\n' + JSON.stringify(data),
+                '\n' + string, JSON.stringify(data),
                 '\n'
             );
         } else {

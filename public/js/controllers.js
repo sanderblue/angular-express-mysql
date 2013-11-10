@@ -85,7 +85,7 @@ function LoginController($scope, $http, $location) {
             
             console.log("SUCCESS Login Response: ", res);    
 
-            $location.url('/restricted');
+            // $location.url('/restricted');
         })
         .error(function(err) {
             console.error('ERROR: ', err);

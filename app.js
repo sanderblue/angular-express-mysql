@@ -32,6 +32,7 @@ app.configure('production', function() {
     app.use(express.errorHandler());
 });
 
+app.enable('trust proxy');
 
 // Initialize ORM
 var sequelize = new Sequelize('angularexpress', 'root', 'password', {
@@ -206,6 +207,8 @@ app.post('/login', function (req, res) {
 
     authenticate(req.body.email, req.body.password, function(err, user) {
         if (user) {
+
+            system.log("USER", user);
                 // Regenerate session when signing in
                 // to prevent fixation 
                 req.session.regenerate(function() {
@@ -218,7 +221,6 @@ app.post('/login', function (req, res) {
                     req.session.user = user;
                     
                     res.redirect('/restricted');
-                    res.send(user);
               });
             } else {
               req.session.error = 'Authentication failed, please check your credentials.';
