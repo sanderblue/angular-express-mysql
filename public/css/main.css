@@ -129,6 +129,12 @@ body {
   padding: 0;
 }
 
+/* line 35, ../sass/partials/_content.scss */
+label.checkbox {
+  line-height: 20px;
+  font-size: 14px;
+}
+
 /* line 1, ../sass/partials/_navigation.scss */
 .navbar {
   background: transparent;
