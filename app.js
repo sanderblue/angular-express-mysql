@@ -19,7 +19,7 @@ app.configure(function () {
     });
     app.use(express.bodyParser());
     app.use(express.cookieParser());
-    app.use(express.session({ secret: 'somethingkindofridiculousthatmakesnosenseatallexceptonlytoyou' }));
+    app.use(express.session({ secret: 'somephrase' }));
     app.use(express.methodOverride());
     app.use(express.static(__dirname + '/public'));
     app.use(app.router);
@@ -44,7 +44,7 @@ var sequelize = new Sequelize('angularexpress', 'root', 'password', {
 
 
 // Import our User model
-var User = sequelize.import(__dirname + '/src/models/user');
+var User = sequelize.import(__dirname + '/src/database/models/user');
 
 
 // Automaticaly generates the user table
@@ -70,7 +70,6 @@ app.use(function (req, res){
 
 // Routes
 app.get('/', routes.index);
-app.get('/restricted', routes.restricted);
 
 
 // Used to generate a hash of the plain-text password + salt
@@ -80,6 +79,7 @@ function hash(msg, key) {
         .update(msg)
         .digest('hex');
 }
+
 
 // Authenticate using MySQL
 function authenticate(email, pass, fn) {
