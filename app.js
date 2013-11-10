@@ -70,7 +70,6 @@ app.use(function (req, res){
 
 // Routes
 app.get('/', routes.index);
-app.get('/restricted', routes.restricted);
 
 
 // Used to generate a hash of the plain-text password + salt
