@@ -8,10 +8,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
             //     templateUrl: 'partials/index',
             //     controller: IndexCtrl
             // })
-            .when('/restricted', {
-                templateUrl: 'partials/index',
-                controller: RestrictedCtrl
-            })
+            // .when('/restricted', {
+            //     templateUrl: 'partials/index',
+            //     controller: RestrictedCtrl
+            // })
             // .otherwise({
             //     redirectTo: '/'
             // });

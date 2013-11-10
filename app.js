@@ -3,10 +3,10 @@ var express   = require('express'),
     http      = require('http'),
     crypto    = require('crypto'),
     mysql     = require('mysql'),
+    system    = require('./src/config/console.js'),
     routes    = require('./src/routes'),
     app       = module.exports = express();
     Sequelize = require(__dirname + '/node_modules/sequelize/index');
-
 
 // Configuration
 app.configure(function () {
@@ -68,7 +68,7 @@ app.use(function (req, res){
 
 // Routes
 app.get('/', routes.index);
-// app.get('/restricted', routes.restricted);
+app.get('/restricted', routes.restricted);
 
 // User login in and restriction supports
 function restrict(req, res, next) {
@@ -92,10 +92,9 @@ function hash(msg, key) {
 
 // Authenticate using MySQL
 function authenticate(email, pass, fn) {
-
-    console.log('Authenticate: ', email, pass);
-
-    if (!module.parent) console.log('Authenticating %s:%s', email, pass);
+    if (!module.parent) {
+        console.log('Authenticating %s:%s', email, pass);
+    }
 
     var user;
 
@@ -105,11 +104,11 @@ function authenticate(email, pass, fn) {
         if (!user_query) {
             // query the db for the given email
             if (!user) {
-                console.log("No User By That Email");
+                system.log("No User By That Email");
                 return fn(new Error('Cannot find user'));
             }
         } else {
-            console.log("User Found.");
+            system.log("User Found.");
             user = new Object();
             user.id = user_query.id;
             user.username = user_query.username;
@@ -119,7 +118,7 @@ function authenticate(email, pass, fn) {
                 return fn(null, user);
             }
 
-            console.log("Invalid Password.");
+            system.log("Invalid Password.");
             fn(new Error('Invalid password'));
         }
     });
@@ -154,7 +153,7 @@ function register(name, pass, email, fn) {
         where: ['username = ? or email = ?', name, email]
     }).success(function (user) {
         if (user.length == 0) {
-            console.log("No matches found, okay to create new user.");
+            system.log("No matches found, okay to create new user.");
 
             User.create({
                 username: name,
@@ -186,7 +185,7 @@ app.post('/register', function(req, res){
     register(req.body.username, req.body.password, req.body.email, function(err, user) {
         if (user) {
             
-            console.log('New user registered: ', user);
+            system.log(user);
 
             res.send(req.body);
         } else {
@@ -203,7 +202,7 @@ app.post('/login', function (req, res) {
     res.header('Access-Control-Allow-Origin', 'http://localhost');
     res.header('Access-Control-Allow-Methods', 'GET, POST');
 
-    console.log('\n\n\n LOGIN REQUEST \n');
+    system.log('LOGIN REQUEST');
 
     authenticate(req.body.email, req.body.password, function(err, user) {
         if (user) {
@@ -211,14 +210,14 @@ app.post('/login', function (req, res) {
                 // to prevent fixation 
                 req.session.regenerate(function() {
 
-                    console.log('Regenerated the session.');
+                    system.log('Regenerated the session.');
 
                     // Store the user's primary key 
                     // in the session store to be retrieved,
                     // or in this case the entire user object
                     req.session.user = user;
                     
-                    // res.redirect('/restricted');
+                    res.redirect('/restricted');
                     res.send(user);
               });
             } else {
@@ -232,6 +231,6 @@ app.post('/login', function (req, res) {
 // Start the server
 if (!module.parent) {
     http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on port ' + app.get('port'));
+        system.log('Express server listening on port ' + app.get('port'));
     });
 }

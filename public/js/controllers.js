@@ -60,12 +60,6 @@ function RegistrationCtrl($scope, $http) {
     };
 }
 
-function IndexCtrl($scope, $http) {
-    $http.get('/api/posts').success(function(data, status, headers, config) {
-        $scope.posts = data.posts;
-    });
-}
-
 function RestrictedCtrl($scope, $http) {
     console.log('Test',$scope);
 
