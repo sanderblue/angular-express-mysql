@@ -9,7 +9,9 @@ block navigation
                         a(class="navbar-logo-holder navigation-logo navigation-logo-main" href="/") AES v0.0.1
 
 block body
-    div(class="container main-container") Hey there. You are logged in.
+    div(class="container main-container") Welcome, 
+        span(class="username")= user.username
+        . This is your special place. 
 
     script(src="js/lib/jquery.min.js")
     script(src="js/lib/bootstrap.min.js")

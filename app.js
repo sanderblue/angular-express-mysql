@@ -1,11 +1,11 @@
 // Module dependencies
 var express   = require('express'),
     http      = require('http'),
-    crypto    = require('crypto'),
     mysql     = require('mysql'),
     jade      = require('jade'),
     system    = require('./src/config/console.js'),
     routes    = require('./src/routes'),
+    util      = require('./src/util/util.js'),
     app       = module.exports = express();
     Sequelize = require(__dirname + '/node_modules/sequelize/index');
 
@@ -14,9 +14,7 @@ app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'jade');
-    app.set('view options', {
-        layout: false
-    });
+    app.set('view options', { layout: false });
     app.use(express.bodyParser());
     app.use(express.cookieParser());
     app.use(express.session({ secret: 'somephrase' }));
@@ -42,15 +40,11 @@ var sequelize = new Sequelize('angularexpress', 'root', 'password', {
     dialect: 'mysql'
 });
 
-
 // Import our User model
 var User = sequelize.import(__dirname + '/src/database/models/user');
 
-
 // Automaticaly generates the user table
 User.sync();
-// User.sync({force:true});//Used to update database if model changes (DROPS TABLE FIRST!)
-
 
 // Session-persisted message middleware
 app.use(function (req, res){
@@ -67,19 +61,8 @@ app.use(function (req, res){
     if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
 });
 
-
 // Routes
 app.get('/', routes.index);
-
-
-// Used to generate a hash of the plain-text password + salt
-function hash(msg, key) {
-    return crypto
-        .createHmac('sha256', key)
-        .update(msg)
-        .digest('hex');
-}
-
 
 // Authenticate using MySQL
 function authenticate(email, pass, fn) {
@@ -105,7 +88,7 @@ function authenticate(email, pass, fn) {
             user.username = user_query.username;
             user.password = user_query.password;
 
-            if (user.password == hash(pass,user_query.salt)) {
+            if (user.password == util.hash(pass,user_query.salt)) {
                 return fn(null, user);
             }
 
@@ -115,30 +98,13 @@ function authenticate(email, pass, fn) {
     });
 }
 
-
-/*
-    User Registration
-*/
-
-
-//Generates user specific salt (Prevent Rainbow Table Attacks)
-function makesalt()
-{
-    var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for( var i=0; i < 15; i++ )
-        text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-    return text;
-}
-
-
 // Register, Save user into MySQL
 function register(name, pass, email, fn) {
-    if (!module.parent) console.log('Registering %s:%s', name, pass);
+    if (!module.parent) {
+        console.log('Registering %s:%s', name, pass);
+    }
 
-    var salt = makesalt();
+    var salt = util.makeSalt();
 
     User.findAll({
         where: ['username = ? or email = ?', name, email]
@@ -149,7 +115,7 @@ function register(name, pass, email, fn) {
             User.create({
                 username: name,
                 email: email,
-                password: hash(pass,salt),
+                password: util.hash(pass,salt),
                 salt: salt
             })
             .success(function (user_query) {
@@ -171,7 +137,7 @@ function register(name, pass, email, fn) {
 app.post('/register', function(req, res){
 
     res.header('Access-Control-Allow-Origin', 'http://localhost');
-    res.header('Access-Control-Allow-Methods', 'GET, POST');
+    res.header('Access-Control-Allow-Methods', 'POST');
 
     register(req.body.username, req.body.password, req.body.email, function(err, user) {
         if (user) {

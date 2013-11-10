@@ -47,8 +47,6 @@ function RegistrationCtrl($scope, $http) {
 }
 
 function LoginController($scope, $http, $location) {
-    $scope.user = {};
-
     $scope.clearFields = function() {
         $scope.user = {};
     };
@@ -58,6 +56,8 @@ function LoginController($scope, $http, $location) {
         .success(function(res) {
             console.log("SUCCESS Login Response: ", res);
             
+            $scope.user = res.data;
+
             window.location = res.route;
         })
         .error(function(err) {
