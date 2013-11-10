@@ -220,6 +220,19 @@ app.post('/login', function (req, res) {
     });
 });
 
+// Logout
+app.get('/logout', function (req, res) {
+
+    // res.contentType('application/json');
+    // res.header('Access-Control-Allow-Origin', 'http://localhost');
+    // res.header('Access-Control-Allow-Methods', 'GET, POST');
+    system.log("Logout", req.session.user);
+
+    delete req.session.user;
+    routes.index(req, res);
+    res.redirect('/');
+});
+
 
 // Start the server
 if (!module.parent) {
